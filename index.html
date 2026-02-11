@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000;
+  }
+
+  p {
+    margin: 0 0 30px 0;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  button {
+    padding: 12px 30px;
+    margin: 0 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  #yes {
+    background-color: #ff4d6d;
+    color: white;
+  }
+
+  #yes:hover {
+    transform: scale(1.05);
+  }
+
+  #no {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+
+  #no:hover {
+    transform: scale(1.05);
+  }
+
+  /* Hearts styling */
+  .heart {
+    position: absolute;
+    font-size: 16px;
+    color: rgba(255, 0, 100, 0.7);
+    pointer-events: none;
+    animation: float 5s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Will you be my Valentine?</h1>
+<p>please</p>
+<div>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+</div>
+
+<script>
+  const noBtn = document.getElementById('no');
+  const yesBtn = document.getElementById('yes');
+
+  // No button runs away
+  noBtn.addEventListener('mouseenter', () => {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+  });
+
+  // Yes button redirect
+  yesBtn.addEventListener('click', () => {
+    window.location.href = "https://example.com"; // change to your URL
+  });
+
+  // Generate floating hearts
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+    heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+    heart.innerText = '❤️';
+    document.body.appendChild(heart);
+
+    // Remove after animation
+    setTimeout(() => {
+      heart.remove();
+    }, 8000);
+  }
+
+  // Create a heart every 400ms
+  setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
